@@ -28,10 +28,10 @@ class TestRobot < Test::Unit::TestCase
     robot = Robot.new
     robot.tableTop = TableTop.new(5, 5)
 
-    robot.set_direction_and_position(Direction::NORTH, Position.new(0, 0))
+    robot.set_direction_and_position(Direction.NORTH, Position.new(0, 0))
 
     assert_equal(true, robot.is_placed_on_table_top)
-    assert_equal(Direction::NORTH, robot.direction)
+    assert_equal(Direction.NORTH, robot.direction)
     assert_equal(Position.new(0, 0), robot.position)
   end
 
@@ -39,7 +39,7 @@ class TestRobot < Test::Unit::TestCase
     robot = Robot.new
     robot.tableTop = TableTop.new(5, 5)
 
-    robot.set_direction_and_position(Direction::NORTH, Position.new(-1, 0))
+    robot.set_direction_and_position(Direction.NORTH, Position.new(-1, 0))
 
     assert_equal(nil, robot.direction)
     assert_equal(nil, robot.position)

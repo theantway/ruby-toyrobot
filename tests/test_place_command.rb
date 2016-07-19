@@ -14,9 +14,9 @@ class TestPlaceCommand < Test::Unit::TestCase
     table_top = TableTop.new(5, 5)
 
     robot.tableTop = table_top
-    PlaceCommand.new(0, 0, Direction::NORTH).execute(robot)
+    PlaceCommand.new(0, 0, Direction.NORTH).execute(robot)
 
-    assert_equal(Direction::NORTH, robot.direction)
+    assert_equal(Direction.NORTH, robot.direction)
     assert_equal(Position.new(0, 0), robot.position)
   end
 
@@ -24,7 +24,7 @@ class TestPlaceCommand < Test::Unit::TestCase
     robot = Robot.new
 
     robot.tableTop = TableTop.new(5, 5)
-    PlaceCommand.new(-1, 0, Direction::NORTH).execute(robot)
+    PlaceCommand.new(-1, 0, Direction.NORTH).execute(robot)
 
     assert_equal(nil, robot.direction)
     assert_equal(nil, robot.position)

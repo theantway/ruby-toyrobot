@@ -1,7 +1,48 @@
 
-module Direction
-  NORTH = 0
-  EAST = 1
-  SOUTH = 2
-  WEST = 3
+class Direction
+  @@NORTH = 0
+  @@EAST = 1
+  @@SOUTH = 2
+  @@WEST = 3
+
+  def self.left(direction)
+    if direction == nil || direction < @@NORTH || direction > @@WEST
+      # TODO: log error
+      return nil
+    end
+
+    left_direction = direction - 1
+    if left_direction < @@NORTH
+      left_direction = @@WEST
+    end
+
+    left_direction
+  end
+
+  def self.right(direction)
+    if direction == nil || direction < @@NORTH || direction > @@WEST
+      # TODO: log error
+      return nil
+    end
+
+    left_direction = direction + 1
+    if left_direction > @@WEST
+      left_direction = @@NORTH
+    end
+
+    left_direction
+  end
+
+  def self.NORTH
+    @@NORTH
+  end
+  def self.EAST
+    @@EAST
+  end
+  def self.SOUTH
+    @@SOUTH
+  end
+  def self.WEST
+    @@WEST
+  end
 end

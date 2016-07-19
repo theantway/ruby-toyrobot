@@ -5,6 +5,7 @@ require_rel "../../../lib/toy-robot/domain"
 
 class TestTableTop < Test::Unit::TestCase
 
+
   def test_bottom_left_position_inside_table_top
     assert TableTop.new(5, 5).is_in_table_area(Position.new(0, 0))
   end
@@ -19,6 +20,10 @@ class TestTableTop < Test::Unit::TestCase
 
   def test_top_right_position_inside_table_top
     assert TableTop.new(5, 5).is_in_table_area(Position.new(4, 4))
+  end
+
+  def test_nil_position
+    assert_equal false, TableTop.new(5, 5).is_in_table_area(nil)
   end
 
   def test_out_bottom

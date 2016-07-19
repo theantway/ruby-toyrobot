@@ -1,3 +1,8 @@
+require "require_all"
+
+require_rel "../domain"
+require_rel "../command"
+
 class CommandReader
   @@PLACE_COMMAND_SIZE = 4
 
@@ -11,12 +16,6 @@ class CommandReader
         'RIGHT' => RightCommand.new,
         'MOVE' => MoveCommand.new,
         'REPORT' => ReportCommand.new,
-    }
-    @directions = {
-        'NORTH' => Direction.NORTH,
-        'EAST' => Direction.EAST,
-        'SOUTH' => Direction.SOUTH,
-        'WEST' => Direction.WEST,
     }
   end
 
@@ -36,7 +35,7 @@ class CommandReader
     if command_parts[0] == 'PLACE'
       x = command_parts[1].to_i
       y = command_parts[2].to_i
-      direction = @directions[command_parts[3]]
+      direction = Direction.from_string(command_parts[3])
 
       if(direction == nil)
         puts "Ignored invalid direction #{command_line}"

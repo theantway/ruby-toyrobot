@@ -1,10 +1,8 @@
-require_relative "../lib/application.rb"
-
 require "test/unit"
 require "require_all"
 
-require_rel "../lib/toy-robot/domain"
-require_rel "../lib/toy-robot/command"
+require_rel "../../../lib/toy-robot/domain"
+require_rel "../../../lib/toy-robot/command"
 
 class TestMoveCommand < Test::Unit::TestCase
 

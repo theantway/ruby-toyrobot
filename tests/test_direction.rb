@@ -22,4 +22,11 @@ class TestDirection < Test::Unit::TestCase
     assert_equal(Direction.NORTH, Direction.right(Direction.WEST))
   end
 
+  def test_next_position
+    assert_equal(Position.new(0, 1), Direction.next_position(Direction.NORTH, Position.new(0, 0)))
+    assert_equal(Position.new(1, 0), Direction.next_position(Direction.EAST, Position.new(0, 0)))
+    assert_equal(Position.new(0, -1), Direction.next_position(Direction.SOUTH, Position.new(0, 0)))
+    assert_equal(Position.new(-1, 0), Direction.next_position(Direction.WEST, Position.new(0, 0)))
+  end
+
 end

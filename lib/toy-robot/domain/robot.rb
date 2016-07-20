@@ -15,7 +15,7 @@ class Robot
       return
     end
 
-    unless @table_top.is_in_table_area(position)
+    unless @table_top.is_position_in_table_area(position)
       # TODO: log and ignore
       return
     end

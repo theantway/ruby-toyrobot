@@ -1,3 +1,4 @@
+require_relative '../logger/logger'
 class Robot
   attr_writer :table_top
   attr_reader :direction
@@ -11,12 +12,12 @@ class Robot
 
   def set_direction_and_position(direction, position)
     if @table_top == nil
-      # TODO: log
+      Logger.logger.warn('TableTop is nil when set direction and position')
       return
     end
 
     unless @table_top.is_position_in_table_area(position)
-      # TODO: log and ignore
+      Logger.logger.warn('Skip the position which is out of the table top')
       return
     end
 

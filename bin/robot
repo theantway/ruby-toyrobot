@@ -4,4 +4,4 @@ $:.unshift File.join(__FILE__, '..', '..', 'lib')
 
 require 'application'
 
-Application.new.cli
+Application.new.run

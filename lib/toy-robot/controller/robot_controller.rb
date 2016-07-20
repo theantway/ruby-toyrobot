@@ -11,7 +11,7 @@ class RobotController
       command = @command_reader.next_command
 
       if command.is_a? QuitCommand
-        return
+        return robot
       end
 
       command.execute(robot)

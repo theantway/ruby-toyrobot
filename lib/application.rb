@@ -5,7 +5,7 @@ require_relative 'toy-robot/controller/robot_controller'
 
 class Application
 
-  def cli
+  def run
     puts "Welcome to Toy Robot's world, please input commands to control the robot."
 
     command_reader = CommandReader.new($stdin)

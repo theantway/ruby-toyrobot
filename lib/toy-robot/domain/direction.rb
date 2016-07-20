@@ -4,23 +4,8 @@ class Direction
   @@SOUTH = 2
   @@WEST = 3
 
-  @@str_to_directions = {
-      'NORTH' => @@NORTH,
-      'EAST' => @@EAST,
-      'SOUTH' => @@SOUTH,
-      'WEST' => @@WEST,
-  }
-
-  @@directions_to_str = {
-      @@NORTH => 'NORTH',
-      @@EAST => 'EAST',
-      @@SOUTH => 'SOUTH',
-      @@WEST => 'WEST',
-  }
-
   def self.left(direction)
     if direction == nil || direction < @@NORTH || direction > @@WEST
-      # TODO: log error
       return nil
     end
 
@@ -34,7 +19,6 @@ class Direction
 
   def self.right(direction)
     if direction == nil || direction < @@NORTH || direction > @@WEST
-      # TODO: log error
       return nil
     end
 
@@ -57,16 +41,24 @@ class Direction
       when @@WEST
         return Position.new(position.x - 1, position.y)
     end
-
-    #   TODO: log error
   end
 
   def self.from_string(direction_in_str)
-    @@str_to_directions[direction_in_str]
+    {
+        'NORTH' => @@NORTH,
+        'EAST' => @@EAST,
+        'SOUTH' => @@SOUTH,
+        'WEST' => @@WEST,
+    }[direction_in_str]
   end
 
   def self.to_string(direction)
-    @@directions_to_str[direction]
+    {
+        @@NORTH => 'NORTH',
+        @@EAST => 'EAST',
+        @@SOUTH => 'SOUTH',
+        @@WEST => 'WEST',
+    }[direction]
   end
 
   def self.NORTH

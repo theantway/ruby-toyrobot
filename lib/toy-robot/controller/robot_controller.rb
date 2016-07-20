@@ -1,16 +1,15 @@
 
+# Read commands and execute on robot
 class RobotController
-  :command_reader
-
   def initialize(command_reader)
     @command_reader = command_reader
   end
 
   def execute(robot)
-    while(true)
+    while true
       command = @command_reader.next_command()
 
-      if(command == nil)
+      if command.is_a? QuitCommand
         return
       end
 

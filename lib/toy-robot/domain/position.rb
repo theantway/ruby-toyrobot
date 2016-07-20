@@ -9,10 +9,6 @@ class Position
   end
 
   def ==(another)
-    if(another == nil)
-      return false
-    end
-
-    [x, y] == [another.x, another.y]
+    another != nil && [x, y] == [another.x, another.y]
   end
 end

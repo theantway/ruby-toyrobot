@@ -3,15 +3,21 @@ require "require_all"
 require_rel "../domain"
 require_rel "../command"
 
+# Read commands from input stream
 class CommandReader
-  @@PLACE_COMMAND_SIZE = 4
+  @@PLACE_COMMAND_LENGTH = 4
 
-  def initialize(input_stream)
-    @input_stream = input_stream
+  def initialize(command_input_stream)
+    @command_input_stream = command_input_stream
+
+    @place_pattern = '\s*PLACE'
+    @number_pattern = '\s*(\d+)\s*'
+    @direction_pattern = '\s*(NORTH|EAST|SOUTH|WEST)\s*'
+    @place_command_pattern = "\\A#{@place_pattern}\s+#{@number_pattern},#{@number_pattern},#{@direction_pattern}\\Z"
 
     @noop_command = NoopCommand.new
 
-    @commands = {
+    @cached_reusable_commands = {
         'LEFT' => LeftCommand.new,
         'RIGHT' => RightCommand.new,
         'MOVE' => MoveCommand.new,
@@ -19,38 +25,37 @@ class CommandReader
     }
   end
 
-  def next_command()
-    command_line = strip(@input_stream.gets).upcase
-    cached_command = @commands[command_line]
-    if cached_command != nil
-      return cached_command
-    end
+  # Read next command from input stream
+  # Always not nil,
+  # use NoopCommand for any invalid command
+  # use QuitCommand for end of input stream
+  def next_command
+    command_line = strip(@command_input_stream.readline.chomp).upcase
 
-    command_parts = command_line.split(/\W+/)
-    if command_parts.size() != @@PLACE_COMMAND_SIZE
-      puts "Ignored invalid commands #{command_line}"
-      return @noop_command
-    end
-
-    if command_parts[0] == 'PLACE'
-      x = command_parts[1].to_i
-      y = command_parts[2].to_i
-      direction = Direction.from_string(command_parts[3])
-
-      if(direction == nil)
-        puts "Ignored invalid direction #{command_line}"
-        return @noop_command
-      end
-
-      return PlaceCommand.new(x, y, direction)
-    end
+    cached_command(command_line) || parse_place_command(command_line) || @noop_command
+  rescue EOFError
+    QuitCommand.new
   end
 
-  def strip(command_line)
-    if (command_line == nil)
-      return ''
+  private def cached_command(command_line)
+    @cached_reusable_commands[command_line]
+  end
+
+  private def parse_place_command(command_line)
+    _, x, y, direction = command_line.match(@place_command_pattern).to_a
+
+    if _ != nil
+      return PlaceCommand.new(x.to_i, y.to_i, Direction.from_string(direction))
     end
 
+    if command_line.length > 0
+      puts "Ignored invalid command #{command_line}"
+    end
+
+    nil
+  end
+
+  private def strip(command_line)
     command_line.strip! || command_line
   end
 end

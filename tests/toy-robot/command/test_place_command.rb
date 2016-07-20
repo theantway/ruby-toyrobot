@@ -10,7 +10,7 @@ class TestPlaceCommand < Test::Unit::TestCase
     robot = Robot.new
     table_top = TableTop.new(5, 5)
 
-    robot.tableTop = table_top
+    robot.table_top = table_top
     PlaceCommand.new(0, 0, Direction.NORTH).execute(robot)
 
     assert_equal(Direction.NORTH, robot.direction)
@@ -20,7 +20,7 @@ class TestPlaceCommand < Test::Unit::TestCase
   def test_prevent_fall_off_table_when_place_robot
     robot = Robot.new
 
-    robot.tableTop = TableTop.new(5, 5)
+    robot.table_top = TableTop.new(5, 5)
     PlaceCommand.new(-1, 0, Direction.NORTH).execute(robot)
 
     assert_equal(nil, robot.direction)

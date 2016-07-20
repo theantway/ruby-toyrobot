@@ -4,7 +4,7 @@ class Direction
   @@SOUTH = 2
   @@WEST = 3
 
-  @@directions = {
+  @@str_to_directions = {
       'NORTH' => @@NORTH,
       'EAST' => @@EAST,
       'SOUTH' => @@SOUTH,
@@ -62,7 +62,7 @@ class Direction
   end
 
   def self.from_string(direction_in_str)
-    @@directions[direction_in_str]
+    @@str_to_directions[direction_in_str]
   end
 
   def self.to_string(direction)

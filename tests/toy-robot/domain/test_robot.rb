@@ -15,7 +15,7 @@ class TestRobot < Test::Unit::TestCase
 
   def test_not_placed_on_table_top_after_set_table_top
     robot = Robot.new
-    robot.tableTop = TableTop.new(5, 5)
+    robot.table_top = TableTop.new(5, 5)
 
     assert_equal(nil, robot.direction)
     assert_equal(nil, robot.position)
@@ -24,7 +24,7 @@ class TestRobot < Test::Unit::TestCase
 
   def test_placed_on_table_top_after_has_direction_and_position
     robot = Robot.new
-    robot.tableTop = TableTop.new(5, 5)
+    robot.table_top = TableTop.new(5, 5)
 
     robot.set_direction_and_position(Direction.NORTH, Position.new(0, 0))
 
@@ -35,7 +35,7 @@ class TestRobot < Test::Unit::TestCase
 
   def test_prevent_fall_off_table_when_place_robot
     robot = Robot.new
-    robot.tableTop = TableTop.new(5, 5)
+    robot.table_top = TableTop.new(5, 5)
 
     robot.set_direction_and_position(Direction.NORTH, Position.new(-1, 0))
 

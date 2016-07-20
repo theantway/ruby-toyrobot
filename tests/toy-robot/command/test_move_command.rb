@@ -10,7 +10,7 @@ class TestMoveCommand < Test::Unit::TestCase
     robot = Robot.new
     table_top = TableTop.new(5, 5)
 
-    robot.tableTop = table_top
+    robot.table_top = table_top
     robot.set_direction_and_position(Direction.NORTH, Position.new(0, 0))
     MoveCommand.new.execute(robot)
 
